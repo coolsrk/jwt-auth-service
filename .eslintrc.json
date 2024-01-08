@@ -1,0 +1,47 @@
+{
+    "env": {
+        "browser": true,
+        "es2018": true
+    },
+    "extends": [
+    ],
+    "parser": "@typescript-eslint/parser",
+    "parserOptions": {
+        "ecmaVersion": 12,
+        "sourceType": "module"
+    },
+    "plugins": [
+        "@typescript-eslint"
+    ],
+    "rules": {
+        "linebreak-style": ["error", "unix"],
+        "@typescript-eslint/no-unused-vars": ["error", { "varsIgnorePattern": "^_" }],
+        "@typescript-eslint/no-explicit-any": "warn",
+        "no-async-promise-executor": "off",
+        "@typescript-eslint/no-var-requires": "off",
+        "@typescript-eslint/no-non-null-assertion":"off",
+        "no-await-in-loop": ["off"],
+        "no-param-reassign":["off"],
+        "prefer-destructuring":["off"],
+        "camelcase":["off"],
+        "import/extensions": ["off"],
+        "import/no-unresolved": ["off"],
+        "semi": ["error", "always"],
+        "no-extra-semi": ["off"],
+        "no-multi-spaces": ["error"],
+        "no-underscore-dangle": ["off"],
+        "class-methods-use-this":["off"],
+        "max-len": ["warn", { "code": 160, "ignoreComments": true }],
+        "import/prefer-default-export": ["off"],
+        "operator-linebreak" : ["error", "before"],
+        "no-restricted-syntax": ["off", "WithStatement"],
+        "no-console":["warn"],
+        "no-shadow": "off",
+        "radix": "off",
+        "no-plusplus":"off",
+        "consistent-return": "off",
+        "dot-notation": "off",
+        "prefer-template": ["error"],
+    }
+};
+
