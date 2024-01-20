@@ -1,15 +1,15 @@
-import winston, { format } from "winston";
-import { LogContext, LogLevel, LoggerInstance } from "./types";
+import winston, { format } from 'winston';
+import { LogContext, LogLevel, LoggerInstance } from './types';
 import dotenv from 'dotenv';
 dotenv.config();
 
 export class Logger implements LoggerInstance {
   private logger: winston.Logger;
-
+  readonly nameSpace: string;
 
   constructor() {
     this.logger = this.initializeWinston();
-    this.logger.info(`Logger initialized.`);
+    this.nameSpace = 'jwt-auth-service';
   }
 
   public info(msg: string, context?: LogContext) {
@@ -22,7 +22,7 @@ export class Logger implements LoggerInstance {
     this.log(msg, LogLevel.ERROR, context);
   }
   public debug(msg: string, context?: LogContext) {
-    if (process.env.ENV === "dev") {
+    if (process.env.ENV === 'dev') {
       this.log(msg, LogLevel.DEBUG, context);
     }
   }
@@ -53,8 +53,10 @@ export class Logger implements LoggerInstance {
       format.timestamp(),
       format.printf(
         (info) =>
-          `[${info.timestamp}] [${info.level.toUpperCase()}]: -> ${info.message
-          } ${info.context ? `\n  Context -> ${JSON.stringify(info.context, null, 2)}` : "" // Including the context
+          `[${info.timestamp}] [${this.nameSpace}] 
+          [${info.level.toUpperCase()}]: -> ${info.message
+          } ${info.context ? `\n  Context -> 
+          ${JSON.stringify(info.context, null, 2)}` : '' // Including the context
           }`
       ),
       format.colorize({ all: true })

@@ -3,14 +3,16 @@
     "editor.tabSize": 2,
     "editor.rulers": [80, 110],
   
-    // Linting & Code Style
-  
-    "eslint.format.enable": true,
-    "eslint.lintTask.enable": true,
-  
     // Let ESLint handle auto-formatting for all files.
     "editor.defaultFormatter": "dbaeumer.vscode-eslint",
     "editor.formatOnSave": true,
+    // Linting & Code Style
+
+    "eslint.format.enable": true,
+    "eslint.lintTask.enable": true,
+    "editor.codeActionsOnSave": {
+      "source.fixAll.eslint": "always"
+    },
     "eslint.validate": [
       "css",
       "graphql",
@@ -23,10 +25,6 @@
       "typescriptreact",
       "yaml"
     ],
-  
-    "editor.codeActionsOnSave": {
-      "source.fixAll.eslint": "always"
-    },
     "[css]": { "editor.defaultFormatter": "dbaeumer.vscode-eslint" },
     "[graphql]": { "editor.defaultFormatter": "dbaeumer.vscode-eslint" },
     "[javascript]": { "editor.defaultFormatter": "dbaeumer.vscode-eslint" },
@@ -34,7 +32,7 @@
     "[json]": { "editor.defaultFormatter": "dbaeumer.vscode-eslint" },
     "[jsonc]": { "editor.defaultFormatter": "dbaeumer.vscode-eslint" },
     "[markdown]": { "editor.defaultFormatter": "dbaeumer.vscode-eslint" },
-    "[typescript]": { "editor.defaultFormatter": "vscode.typescript-language-features" },
+    "[typescript]": { "editor.defaultFormatter": "dbaeumer.vscode-eslint" },
     "[typescriptreact]": { "editor.defaultFormatter": "dbaeumer.vscode-eslint" },
     "[yaml]": { "editor.defaultFormatter": "dbaeumer.vscode-eslint" },
   
@@ -66,5 +64,7 @@
   
     "typescript.tsdk": "node_modules/typescript/lib",
     "typescript.suggest.completeJSDocs": false,
-  
+    "javascript.preferences.quoteStyle": "single",
+    "typescript.preferences.quoteStyle": "single"
+
   }

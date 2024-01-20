@@ -1,16 +1,19 @@
-import express from 'express';
-import { Request, Response } from 'express';
-import dotenv from 'dotenv';
+import { expressApp } from './app';
 import { Logger } from './lib/logger/logger';
+import { Server } from './server';
 
-dotenv.config();
-const app = express();
-const LOG = new Logger();
+const log = new Logger();
 
-app.use('/', (req: Request, res: Response) => {
-  res.send('Welcome to JWT Auth Service! 🚀');
-});
+const createServer = async () => {
+  const server = new Server(log);
+  await Promise.all([
+    server.dbConnection()
+  ]);
+  expressApp();
+};
 
-app.listen(process.env.PORT, () => {
-  LOG.info(`Working! Check it out on http://localhost:${process.env.PORT}`);
-});
+createServer()
+.then()
+.catch((error: unknown) => console.error(error instanceof Error 
+  ? error.message 
+  : JSON.stringify(error)));

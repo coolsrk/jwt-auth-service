@@ -1,20 +1,16 @@
 {
     "env": {
-        "browser": true,
-        "es2018": true
+        "browser": true
     },
-    "extends": [
-    ],
-    "parser": "@typescript-eslint/parser",
+    "extends": "eslint:recommended",
     "parserOptions": {
-        "ecmaVersion": 12,
+        "ecmaVersion": "latest",
         "sourceType": "module"
     },
-    "plugins": [
-        "@typescript-eslint"
-    ],
+    "parser": "@typescript-eslint/parser",
+    "plugins": ["@typescript-eslint", "unused-imports"],
     "rules": {
-        "linebreak-style": ["error", "unix"],
+        "linebreak-style": ["error", "windows"],
         "@typescript-eslint/no-unused-vars": ["error", { "varsIgnorePattern": "^_" }],
         "@typescript-eslint/no-explicit-any": "warn",
         "no-async-promise-executor": "off",
@@ -31,17 +27,26 @@
         "no-multi-spaces": ["error"],
         "no-underscore-dangle": ["off"],
         "class-methods-use-this":["off"],
-        "max-len": ["warn", { "code": 160, "ignoreComments": true }],
+        "max-len": ["warn", { "code": 100, "tabWidth": 2,"ignoreComments": true }],
         "import/prefer-default-export": ["off"],
         "operator-linebreak" : ["error", "before"],
         "no-restricted-syntax": ["off", "WithStatement"],
-        "no-console":["warn"],
         "no-shadow": "off",
         "radix": "off",
         "no-plusplus":"off",
         "consistent-return": "off",
         "dot-notation": "off",
         "prefer-template": ["error"],
+        "quotes": ["error", "single",{ "avoidEscape": true, 
+        "allowTemplateLiterals": true }],
+        "no-undef": ["off"],
+        "unused-imports/no-unused-imports": "error",
+        "sort-imports": [
+            "error",
+            {
+              "ignoreDeclarationSort": true
+            }
+        ]
     }
-};
+}
 

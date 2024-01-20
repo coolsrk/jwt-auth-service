@@ -6,6 +6,7 @@
     collectCoverageFrom: ['<rootDir>/src/**/*.ts'],
     testMatch: ['<rootDir>/test/**/*.spec.ts'],
     coverageReporters: ['lcov', 'html'],
+    setupFiles: ['<rootDir>/.jest/setEnvVars.js'],
     preset: 'ts-jest',
     clearMocks: true,
   };
