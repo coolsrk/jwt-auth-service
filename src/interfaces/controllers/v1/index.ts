@@ -1,0 +1,1 @@
+export { UserControllerInterface } from './userController';

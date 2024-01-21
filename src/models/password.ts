@@ -1,12 +1,7 @@
 import { Column, DataType, ForeignKey,
    Model, PrimaryKey, Table, Unique } from 'sequelize-typescript';
 import User from './user';
-
-interface PasswordInterface {
-    id? : string;
-    userId: string;
-    passwordData?: string;
-  }
+import { PasswordInterface } from '../interfaces/models';
     
   @Table
   class Password extends Model<PasswordInterface> {
@@ -16,13 +11,11 @@ interface PasswordInterface {
     id!: string;
     
     @ForeignKey(()=> User)     
-    // @BelongsTo(() => User, 'userId')
-    @Column({type: DataType.UUID, defaultValue: DataType.UUIDV4})
+    @Column({type: DataType.UUID})
     userId!: string;
 
-
-    @Column({type: DataType.STRING(1024), allowNull: false})
-    passwordData!: string;
+    @Column({type: DataType.STRING, allowNull: false})
+    password!: string;
   }
 
   export default Password;

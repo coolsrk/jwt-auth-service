@@ -1,15 +1,8 @@
 import { Column, DataType, HasOne, Length, 
   Model, PrimaryKey, Table, Unique } from 'sequelize-typescript';
-import Password from './password';
-
-interface UserInterface {
-    userId?: string;
-    name: string;
-    lastName?: string;
-    mobNo: number;
-    password: Password
-  }
-    
+import Password from './password';    
+import { UserInterface } from '../interfaces/models';
+import Salt from './salt';
 
   @Table
   class User extends Model<UserInterface> {
@@ -18,18 +11,25 @@ interface UserInterface {
     @Column({type: DataType.UUID})
     userId!: string;
 
-    @Column({type: DataType.STRING(1024), allowNull: false})
+    @Column({type: DataType.STRING, allowNull: false})
     name!: string;
 
-    @Column({type: DataType.STRING(1024), allowNull: true})
+    @Column({type: DataType.STRING, allowNull: true})
     lastName!: string;
 
     @Length({max: 10, min:10})
-    @Column({type: DataType.BIGINT})
+    @Column({type: DataType.BIGINT, allowNull: true})
     mobNo!: number;
+
+    @Unique
+    @Column({type: DataType.STRING, allowNull: false, validate: {isEmail: true}})
+    email!: string;
 
     @HasOne(()=> Password, 'userId')
     password!: Password;
+
+    @HasOne(()=> Salt, 'userId')
+    salt!: Salt;
   }
 
   export default User;

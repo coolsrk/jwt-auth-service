@@ -1,7 +1,7 @@
 import express, { Router } from 'express';
-import { V1Routes } from './v1';
+import { UserRoutes } from './userRoutes';
 
-export class APIRoutes {
+export class V1Routes {
   private readonly router: Router;
   constructor(){
     this.router = express.Router();
@@ -9,8 +9,7 @@ export class APIRoutes {
   }
 
   private setRoutes = () => {
-    console.log('Inside APIRoutes setRoutes()');
-    this.router.use('/v1', new V1Routes().getRoutes());
+    this.router.use('/user', new UserRoutes().getRoutes());
   };
 
   public getRoutes = () => {

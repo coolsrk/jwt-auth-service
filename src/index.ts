@@ -3,7 +3,6 @@ import { Logger } from './lib/logger/logger';
 import { Server } from './server';
 
 const log = new Logger();
-
 const createServer = async () => {
   const server = new Server(log);
   await Promise.all([

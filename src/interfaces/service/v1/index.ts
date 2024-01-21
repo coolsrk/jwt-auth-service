@@ -1,0 +1,1 @@
+export { UserServiceInterface } from './userService';
