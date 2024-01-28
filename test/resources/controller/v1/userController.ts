@@ -1,7 +1,7 @@
 import { UserRegistrationRequest } from '../../../../src/interfaces/request';
-import { UserResponse } from '../../../../src/interfaces/response/userRegistrationResponse';
+import { UserResponse } from '../../../../src/interfaces/response';
 
-export const mockUserInfo: UserRegistrationRequest = {
+export const mockUserRegistrationRequest: UserRegistrationRequest = {
   firstName: 'test',
   lastName: 'test',
   password: 'test12345',
@@ -22,7 +22,7 @@ export const mockUserDbResponse = {
   updatedAt: new Date('2024-01-21T15:25:12.431Z'),
 };
 
-export const mockCreatedUser: UserResponse = {
+export const mockUserResponse: UserResponse = {
   firstName: 'test',
   lastName: 'test',
   mobileNo: 1234567890,

@@ -1,13 +1,12 @@
 import { UserControllerInterface } from '../../interfaces/controllers/v1';
 import { NextFunction, Request, Response } from 'express';
-import { UserServiceInterface } from '../../interfaces/service/v1';
 import { UserService } from '../../service/v1';
 import { Logger } from '../../lib/logger/logger';
 import { UserRegistrationRequest } from '../../interfaces/request';
 
 export class UserController implements UserControllerInterface {
   public logger: Logger;
-  public userService: UserServiceInterface;
+  public userService: UserService;
   constructor() {
     this.logger = new Logger();
     this.userService = new UserService(this.logger);

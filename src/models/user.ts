@@ -2,7 +2,6 @@ import { Column, DataType, HasOne, Length,
   Model, PrimaryKey, Table, Unique } from 'sequelize-typescript';
 import Password from './password';    
 import { UserInterface } from '../interfaces/models';
-import Salt from './salt';
 
 @Table
 class User extends Model<UserInterface> {
@@ -30,9 +29,6 @@ class User extends Model<UserInterface> {
 
   @HasOne(()=> Password, 'userId')
   password!: Password;
-
-  @HasOne(()=> Salt, 'userId')
-  salt!: Salt;
 }
 
 export default User;

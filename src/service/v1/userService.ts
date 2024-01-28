@@ -1,13 +1,12 @@
-import { PasswordInterface, SaltInterface, UserInterface } from '../../interfaces/models';
+import { PasswordInterface, UserInterface } from '../../interfaces/models';
 import { UserRegistrationRequest } from '../../interfaces/request';
 import { UserServiceInterface } from '../../interfaces/service/v1';
 import Password from '../../models/password';
 import User from '../../models/user';
 import {v4} from 'uuid';
 import bcrypt from 'bcrypt';
-import Salt from '../../models/salt';
 import { Logger } from '../../lib/logger/logger';
-import { UserResponse } from '../../interfaces/response/userRegistrationResponse';
+import { UserResponse } from '../../interfaces/response';
 
 export class UserService implements UserServiceInterface {
   public logger: Logger;
@@ -19,7 +18,7 @@ export class UserService implements UserServiceInterface {
   public async createUser(userInfo: UserRegistrationRequest): Promise<UserResponse> {
     try {
       const userId = v4();
-      const {salt, password} = this.generatePasswordHash(userInfo.password);
+      const password = this.generatePasswordHash(userInfo.password);
       await User.create({
         userId,
         name: userInfo.firstName,
@@ -30,12 +29,9 @@ export class UserService implements UserServiceInterface {
         password:{
           password: password
         } as PasswordInterface,
-        salt: {
-          salt
-        } as SaltInterface
       },
       {
-        include : [{model: Password }, {model: Salt}]
+        include : [{model: Password }]
       });
       this.logger.info('User registered successfully!');
 
@@ -52,11 +48,11 @@ export class UserService implements UserServiceInterface {
     }
   }
 
-  public generatePasswordHash(password: string): {salt: string, password: string} {
+  public generatePasswordHash(password: string):string {
     const saltRounds = 10;
     const salt = bcrypt.genSaltSync(saltRounds);
     const passwordHash = bcrypt.hashSync(password, salt);
-    return {salt, password:passwordHash};
+    return passwordHash;
   }
 
   public async findUserByEmail(email: string): Promise<UserResponse | null> {

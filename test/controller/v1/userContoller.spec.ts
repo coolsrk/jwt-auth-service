@@ -2,9 +2,8 @@ import { UserController } from '../../../src/controllers/v1';
 import { UserRegistrationRequest } from '../../../src/interfaces/request';
 import { Logger } from '../../../src/lib/logger/logger';
 import { Request, Response } from 'express';
-import { mockCreatedUser, mockUserInfo } from '../../resources/controller/v1/userController';
-import { UserResponse } from 
-'../../../src/interfaces/response/userRegistrationResponse';
+import { mockUserRegistrationRequest, mockUserResponse } from '../../resources/controller/v1/userController';
+import { UserResponse } from '../../../src/interfaces/response/';
 
 describe('UserController', () => {
   let mockUserController: UserController;
@@ -23,8 +22,8 @@ describe('UserController', () => {
       debug: jest.fn(),
     } as unknown as Logger;
     mockUserController.logger = mockLogger;
-    userInfo = mockUserInfo;
-    userCreatedResponse = mockCreatedUser;
+    userInfo = mockUserRegistrationRequest;
+    userCreatedResponse = mockUserResponse;
     mockRequest = {
       body: userInfo,
     } as unknown as Request;

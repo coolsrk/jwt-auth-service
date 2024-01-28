@@ -41,6 +41,7 @@
         "allowTemplateLiterals": true }],
         "no-undef": ["off"],
         "unused-imports/no-unused-imports": "error",
+        "eol-last": ["error", "always"],
         "sort-imports": [
             "error",
             {
