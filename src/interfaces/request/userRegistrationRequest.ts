@@ -1,9 +1,9 @@
 export interface UserRegistrationRequest {
   firstName: string;
-  lastName: string;
+  lastName?: string;
   password: string;
   confirmPassword: string;
-  mobileNo: number;
+  mobileNo?: number;
   email: string;
-  address: string;
+  address?: string;
 }

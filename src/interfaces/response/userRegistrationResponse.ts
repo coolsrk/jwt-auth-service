@@ -1,7 +1,7 @@
-export interface UserRegistrationResponse {
+export interface UserResponse {
   firstName: string;
-  lastName: string;
-  mobileNo: number;
+  lastName?: string;
+  mobileNo?: number;
   email: string;
-  address: string;
+  address?: string;
 }

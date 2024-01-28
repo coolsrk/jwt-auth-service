@@ -4,4 +4,5 @@ import { Logger } from '../../../lib/logger/logger';
 export interface UserControllerInterface {
   logger: Logger;
   registerUser(req: Request, res: Response, next: NextFunction): Promise<any>;
+  getUserInfo(req: Request, res: Response, next: NextFunction): Promise<any>;
 }

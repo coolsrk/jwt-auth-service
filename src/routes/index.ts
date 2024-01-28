@@ -9,7 +9,6 @@ export class APIRoutes {
   }
 
   private setRoutes = () => {
-    console.log('Inside APIRoutes setRoutes()');
     this.router.use('/v1', new V1Routes().getRoutes());
   };
 

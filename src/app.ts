@@ -2,6 +2,7 @@ import express, {NextFunction, Request, Response} from 'express';
 import dotenv from 'dotenv';
 import { Logger } from './lib/logger/logger';
 import { APIRoutes } from './routes';
+import { errorHandlingMiddleware } from './middlewares/errorHandlingMiddleware';
 
 dotenv.config();
 const app = express();
@@ -15,7 +16,7 @@ export const expressApp = () => {
   });
 
   app.use('/api', new APIRoutes().getRoutes());
-
+  app.use(errorHandlingMiddleware);
   app.listen(process.env.PORT, () => {
     LOG.info(`Working! Check it out on http://localhost:${process.env.PORT}`);
   });

@@ -71,4 +71,28 @@ export class UserController implements UserControllerInterface {
       next(error);
     }
   };
+
+  public getUserInfo = async (req: Request, res: Response, next: NextFunction) =>{
+    try {
+      const {userId} = req.params;
+      const result = await this.userService.getUserById(userId);
+      if(result){
+        res.status(200).send({
+          success: true,
+          message: '',
+          data: result,
+          errors: [],
+        });
+      }else {
+        res.status(404).send({
+          success: false,
+          message: `User with userId ${userId} is not registered with us!`,
+          data: {},
+          errors: [],
+        });
+      }
+    } catch (error: unknown) {
+      next(error);
+    }
+  };
 }

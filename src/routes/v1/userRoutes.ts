@@ -10,8 +10,8 @@ export class UserRoutes {
 
   private setRoutes = () =>{
     const userController = new UserController();
-    console.log('Inside UserRoutes setRoutes()');
     this.router.post('/register', userController.registerUser);
+    this.router.get('/:userId', userController.getUserInfo);
   };
 
   public getRoutes = () => {

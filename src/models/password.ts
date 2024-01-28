@@ -3,19 +3,19 @@ import { Column, DataType, ForeignKey,
 import User from './user';
 import { PasswordInterface } from '../interfaces/models';
     
-  @Table
-  class Password extends Model<PasswordInterface> {
-    @Unique
-    @PrimaryKey
-    @Column({type: DataType.UUID, defaultValue: DataType.UUIDV4})
-    id!: string;
-    
-    @ForeignKey(()=> User)     
-    @Column({type: DataType.UUID})
-    userId!: string;
+@Table
+class Password extends Model<PasswordInterface> {
+  @Unique
+  @PrimaryKey
+  @Column({type: DataType.UUID, defaultValue: DataType.UUIDV4})
+  id!: string;
+  
+  @ForeignKey(()=> User)     
+  @Column({type: DataType.UUID})
+  userId!: string;
 
-    @Column({type: DataType.STRING, allowNull: false})
-    password!: string;
-  }
+  @Column({type: DataType.STRING, allowNull: false})
+  password!: string;
+}
 
-  export default Password;
+export default Password;

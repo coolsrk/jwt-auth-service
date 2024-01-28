@@ -4,32 +4,35 @@ import Password from './password';
 import { UserInterface } from '../interfaces/models';
 import Salt from './salt';
 
-  @Table
-  class User extends Model<UserInterface> {
-    @Unique
-    @PrimaryKey
-    @Column({type: DataType.UUID})
-    userId!: string;
+@Table
+class User extends Model<UserInterface> {
+  @Unique
+  @PrimaryKey
+  @Column({type: DataType.UUID, allowNull: false})
+  userId!: string;
 
-    @Column({type: DataType.STRING, allowNull: false})
-    name!: string;
+  @Column({type: DataType.STRING, allowNull: false})
+  name!: string;
 
-    @Column({type: DataType.STRING, allowNull: true})
-    lastName!: string;
+  @Column({type: DataType.STRING, allowNull: true})
+  lastName!: string;
 
-    @Length({max: 10, min:10})
-    @Column({type: DataType.BIGINT, allowNull: true})
-    mobNo!: number;
+  @Unique
+  @Column({type: DataType.STRING, allowNull: false, validate: {isEmail: true}})
+  email!: string;
 
-    @Unique
-    @Column({type: DataType.STRING, allowNull: false, validate: {isEmail: true}})
-    email!: string;
+  @Length({max: 10, min:10})
+  @Column({type: DataType.BIGINT, allowNull: true})
+  mobNo!: number;
 
-    @HasOne(()=> Password, 'userId')
-    password!: Password;
+  @Column({type: DataType.STRING, allowNull: true})
+  address!: string;
 
-    @HasOne(()=> Salt, 'userId')
-    salt!: Salt;
-  }
+  @HasOne(()=> Password, 'userId')
+  password!: Password;
 
-  export default User;
+  @HasOne(()=> Salt, 'userId')
+  salt!: Salt;
+}
+
+export default User;
