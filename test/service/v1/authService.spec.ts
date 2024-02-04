@@ -3,6 +3,7 @@ import User from '../../../src/models/user';
 import { AuthService, UserService } from '../../../src/service/v1';
 import { mockUserDataWithAuthInfo } from '../../resources/controller/v1/authController';
 import bcrypt from 'bcrypt';
+import jwt from 'jsonwebtoken';
 
 describe('Auth Service', () => {
   let mockLogger: Logger;
@@ -46,6 +47,19 @@ describe('Auth Service', () => {
       await expect(
         mockAuthService.isUserAuthenticated('test@test.com', 'test')
       ).rejects.toThrow(/Error while authenticating user:/gim);
+    });
+  });
+
+  describe('generateJwtToken()', () => {
+    it('Should generate JWT token and refresh token', () => {
+      const jwtToken = mockAuthService.generateJwtToken('test@test.com', 'test');
+      expect(jwtToken).toHaveProperty('token');
+      expect(jwtToken).toHaveProperty('refreshToken');
+    });
+
+    it('Should throw an error if failed to generate token', () => {
+      jwt.sign = jest.fn().mockImplementationOnce(() => {throw new Error();});
+      expect(mockAuthService.generateJwtToken).toThrow(/Error while generating JWT token:/gim);
     });
   });
 });

@@ -1,5 +1,5 @@
 import { PasswordInterface, UserInterface } from '../../interfaces/models';
-import { UserRegistrationRequest } from '../../interfaces/request';
+import { UpdateUserRequest, UserRegistrationRequest } from '../../interfaces/request';
 import { UserServiceInterface } from '../../interfaces/service/v1';
 import Password from '../../models/password';
 import User from '../../models/user';
@@ -55,20 +55,19 @@ export class UserService implements UserServiceInterface {
     return passwordHash;
   }
 
-  public async findUserByEmail(email: string): Promise<UserResponse | null> {
+  public async findUserByEmail(email: string): Promise<User | null> {
     try {
       const user = await User.findOne({where: {email: email}});
-      return user ? this.mapUserInfo(user) : null;
+      return user ? user : null;
     } catch (error) {
       throw new Error(error instanceof Error ? error.message : JSON.stringify(error) );
     }
   }
 
-  public async getUserById(userId: string): Promise<UserResponse|null>{
+  public async getUserById(userId: string): Promise<User|null>{
     try {
       const user = await User.findByPk(userId);
-      this.logger.info(JSON.stringify(user));
-      return user ? this.mapUserInfo(user) : null;
+      return user ? user : null;
     } catch (error: unknown) {
       throw new Error(error instanceof Error ? error.message : JSON.stringify(error) );
     }
@@ -82,5 +81,19 @@ export class UserService implements UserServiceInterface {
       email: inputData?.email,
       address: inputData?.address,
     };
+  }
+
+  public async updateUserInfo(inputData: UpdateUserRequest, userId: string): Promise<void> {
+    try {
+      await User.update({
+        name: inputData.firstName, 
+        lastName: inputData.lastName, 
+        mobNo: inputData.mobileNo,
+        address: inputData.address 
+      }, {where: {userId: userId}});
+    } catch (error) {
+      this.logger.error(JSON.stringify(error));
+      throw new Error(error instanceof Error ? error.message : JSON.stringify(error) );
+    }
   }
 }

@@ -15,6 +15,33 @@
       "args": ["${relativeFile}"],
       "console": "integratedTerminal",
       "internalConsoleOptions": "neverOpen",
+    },
+    {
+      "type": "node",
+      "request": "launch",
+      "name": "Window Jest Debugger",
+      "program": "${workspaceRoot}/node_modules/jest/bin/jest.js",
+      "args": [
+        "--collectCoverage=false",
+        "--colors",
+        "--config",
+        "${workspaceRoot}/jest.config.js",
+        "--runInBand",
+        "--runTestsByPath",
+        "${relativeFile}",
+        "--testPathPattern=${fileDirname}",
+        "--testTimeout=10000000"
+      ],
+      "outputCapture": "std",
+      "internalConsoleOptions": "openOnSessionStart",
+
+      "skipFiles": [
+        "${workspaceRoot}/../../node_modules/**/*",
+        "<node_internals>/**/*"
+      ],
+      "windows": {
+        "skipFiles": ["C:\\**\\node_modules\\**\\*", "<node_internals>/**/*"]
+      },
     }
   ]
 }

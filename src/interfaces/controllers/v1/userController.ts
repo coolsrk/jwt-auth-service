@@ -6,5 +6,6 @@ export interface UserControllerInterface {
   logger: Logger;
   userService: UserService;
   registerUser(req: Request, res: Response, next: NextFunction): Promise<any>;
-  getUserInfo(req: Request, res: Response, next: NextFunction): Promise<any>;
+  getUserInfoById(req: Request, res: Response, next: NextFunction): Promise<any>;
+  updateUserInfo(req: Request, res: Response, next: NextFunction): Promise<any>;
 }
