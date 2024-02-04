@@ -28,8 +28,8 @@ export class AuthController implements AuthControllerInterface {
         });
       }
 
-      const isUserExist = await this.userService.findUserByEmail(email);
-      if(!isUserExist){
+      const user = await this.userService.findUserByEmail(email);
+      if(!user){
         return res.status(404)
         .send({
           success: false,
@@ -51,7 +51,7 @@ export class AuthController implements AuthControllerInterface {
         });
       }
 
-      const {token, refreshToken} = this.authService.generateJwtToken(email);
+      const {token, refreshToken} = this.authService.generateJwtToken(email, user.userId);
       return res.status(200)
       .send({
         success: true,
