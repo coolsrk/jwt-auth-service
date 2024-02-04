@@ -8,4 +8,5 @@ export interface UserInterface {
   email: string;
   address?: string;
   password: PasswordInterface;
+  roleId? : number
 }
