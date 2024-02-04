@@ -1,5 +1,6 @@
 name: Test Unit CI
-
+env: 
+  JWT_SECRET_KEY: Secret
 on:
   push:
     branches: [ "main" ]
@@ -24,4 +25,3 @@ jobs:
         cache: 'npm'
     - run: npm i
     - run: npm run test-unit
-    
