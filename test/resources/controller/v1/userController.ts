@@ -29,3 +29,10 @@ export const mockUserResponse: UserResponse = {
   email: 'test1234@gmail.com',
   address: 'test',
 };
+
+export const mockUserUpdateRequest = {
+  firstName: 'test2',
+  lastName: 'test2',
+  mobileNo: 1234567890,
+  address: 'test2'
+};

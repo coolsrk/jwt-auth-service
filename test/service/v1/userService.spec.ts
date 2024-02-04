@@ -2,6 +2,7 @@ import {
   mockUserDbResponse,
   mockUserRegistrationRequest,
   mockUserResponse,
+  mockUserUpdateRequest,
 } from '../../resources/controller/v1/userController';
 import { UserRegistrationRequest } from '../../../src/interfaces/request';
 import { UserResponse } from '../../../src/interfaces/response';
@@ -41,7 +42,7 @@ describe('User Service', () => {
     it('Should return user data if it is already present in the db', async () => {
       User.findOne = jest.fn().mockResolvedValueOnce(mockUserDbResponse);
       const result = await mockUserService.findUserByEmail('test@gmail.com');
-      expect(result).toEqual(userInfoResponse);
+      expect(result).toEqual(mockUserDbResponse);
     });
 
     it('Should return null if the user is not present in the db', async () => {
@@ -57,7 +58,7 @@ describe('User Service', () => {
       const result = await mockUserService.getUserById(
         'a389eed4-1030-413d-af47-d11bee952498'
       );
-      expect(result).toEqual(userInfoResponse);
+      expect(result).toEqual(mockUserDbResponse);
     });
 
     it('Should return the null if user with the given id is not present', async () => {
@@ -77,6 +78,34 @@ describe('User Service', () => {
       await expect(
         mockUserService.getUserById('a389eed4-1030')
       ).rejects.toThrow(/invalid input syntax for type uuid: \\"a389eed4-1030\\"/gim);
+    });
+  });
+
+  describe('updateUserInfo()', () => {
+    it('Should successfully able to update the user', async () => {
+      User.update = jest
+        .fn()
+        .mockResolvedValueOnce(
+          Promise.resolve([1])
+        );
+      await expect(
+        mockUserService.updateUserInfo(
+          mockUserUpdateRequest, 
+          'a389eed4-1030-413d-af47-d11bee952498')
+      ).resolves.not.toThrow();
+    });
+
+    it('Should throw an error if something goes wrong', async () => {
+      User.update = jest
+        .fn()
+        .mockRejectedValueOnce(
+          'error'
+        );
+      await expect(
+        mockUserService.updateUserInfo(
+          mockUserUpdateRequest, 
+          'a389eed4-1030-413d-af47-d11bee952498')
+      ).rejects.toThrow('error');
     });
   });
 });

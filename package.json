@@ -4,7 +4,7 @@
   "description": "This is simple JWT Auth service, which includes user registration, login and refresh token functionality.",
   "main": "./dist/src/index.js",
   "scripts": {
-    "test": "npm run build && jest",
+    "test-unit": "tsc && sh ./scripts/test-unit.sh",
     "build": "tsc",
     "start": "npm run build && node ./dist/index.js"
   },

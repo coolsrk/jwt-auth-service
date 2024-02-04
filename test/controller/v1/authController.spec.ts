@@ -1,7 +1,7 @@
 import { AuthController } from '../../../src/controllers/v1/authController';
 import { Logger } from '../../../src/lib/logger/logger';
 import { Request, Response } from 'express';
-import { mockUserResponse } from '../../resources/controller/v1/userController';
+import { mockUserDbResponse, mockUserResponse } from '../../resources/controller/v1/userController';
 
 describe('AuthController', () => {
   let mockAuthController: AuthController;
@@ -75,7 +75,7 @@ describe('AuthController', () => {
     authentication failed due to wrong password`, async () => {
       mockAuthController.userService.findUserByEmail = jest
         .fn()
-        .mockResolvedValueOnce(mockUserResponse);
+        .mockResolvedValueOnce(mockUserDbResponse);
       mockAuthController.authService.isUserAuthenticated = jest
         .fn()
         .mockResolvedValueOnce(false);
