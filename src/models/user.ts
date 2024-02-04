@@ -1,7 +1,8 @@
-import { Column, DataType, HasOne, Length, 
+import { Column, DataType, ForeignKey, HasOne, Length, 
   Model, PrimaryKey, Table, Unique } from 'sequelize-typescript';
 import Password from './password';    
 import { UserInterface } from '../interfaces/models';
+import Role from './role';
 
 @Table
 class User extends Model<UserInterface> {
@@ -29,6 +30,10 @@ class User extends Model<UserInterface> {
 
   @HasOne(()=> Password, 'userId')
   password!: Password;
+
+  @ForeignKey(() => Role)
+  @Column({type: DataType.INTEGER, defaultValue: 1})
+  roleId!: number;
 }
 
 export default User;
