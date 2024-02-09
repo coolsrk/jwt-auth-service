@@ -1,7 +1,7 @@
-import { Logger } from '../../../src/lib/logger/logger';
-import User from '../../../src/models/user';
-import { AuthService, UserService } from '../../../src/service/v1';
-import { mockUserDataWithAuthInfo } from '../../resources/controller/v1/authController';
+import { Logger } from '../../../../src/lib/logger/logger';
+import User from '../../../../src/models/user';
+import { AuthService, UserService } from '../../../../src/service/v1';
+import { mockUserDataWithAuthInfo } from '../../../resources/controller/v1/authController';
 import bcrypt from 'bcrypt';
 import jwt from 'jsonwebtoken';
 
@@ -52,9 +52,15 @@ describe('Auth Service', () => {
 
   describe('generateJwtToken()', () => {
     it('Should generate JWT token and refresh token', () => {
-      const jwtToken = mockAuthService.generateJwtToken('test@test.com', 'test');
+      const jwtToken = mockAuthService.generateJwtToken('test@test.com', 'test', 1);
       expect(jwtToken).toHaveProperty('token');
       expect(jwtToken).toHaveProperty('refreshToken');
+      const decoded: any = jwt.decode(jwtToken.token);
+      console.log(JSON.stringify(decoded));
+      expect(decoded).toHaveProperty('userId');
+      expect(decoded).toHaveProperty('role');
+      expect(decoded).toHaveProperty('tokenId');
+      expect(decoded).toHaveProperty('email');
     });
 
     it('Should throw an error if failed to generate token', () => {

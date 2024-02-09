@@ -51,7 +51,8 @@ export class AuthController implements AuthControllerInterface {
         });
       }
 
-      const {token, refreshToken} = this.authService.generateJwtToken(email, user.userId);
+      const {token, refreshToken} 
+      = this.authService.generateJwtToken(email, user.userId, user.roleId);
       return res.status(200)
       .send({
         success: true,

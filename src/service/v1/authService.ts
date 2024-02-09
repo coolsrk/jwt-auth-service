@@ -36,14 +36,17 @@ export class AuthService implements AuthServiceInterface {
     }
   };
 
-  public generateJwtToken = (email: string, userId: string): LoginResponse => {
+  public generateJwtToken = (email: string, userId: string, roleId: number): LoginResponse => {
     try{
       const refreshToken = v4();
       const tokenId = v4();
+      const role = roleId === 1 ? 'user' : 'admin';
+
       const token = jwt.sign(
         {
           tokenId,
           userId,
+          role,
           email,
         },
         process.env.JWT_SECRET_KEY!,

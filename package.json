@@ -6,7 +6,7 @@
   "scripts": {
     "test-unit": "tsc && sh ./scripts/test-unit.sh",
     "build": "tsc",
-    "start": "npm run build && node ./dist/index.js"
+    "start": "npm run build && node ./dist/src/index.js"
   },
   "keywords": [
     "NodeJs",

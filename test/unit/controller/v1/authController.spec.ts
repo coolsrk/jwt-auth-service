@@ -1,7 +1,7 @@
-import { AuthController } from '../../../src/controllers/v1/authController';
-import { Logger } from '../../../src/lib/logger/logger';
+import { AuthController } from '../../../../src/controllers/v1/authController';
+import { Logger } from '../../../../src/lib/logger/logger';
 import { Request, Response } from 'express';
-import { mockUserDbResponse, mockUserResponse } from '../../resources/controller/v1/userController';
+import { mockUserDbResponse, mockUserResponse } from '../../../resources/controller/v1/userController';
 
 describe('AuthController', () => {
   let mockAuthController: AuthController;

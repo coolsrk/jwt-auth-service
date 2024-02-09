@@ -3,12 +3,12 @@ import {
   mockUserRegistrationRequest,
   mockUserResponse,
   mockUserUpdateRequest,
-} from '../../resources/controller/v1/userController';
-import { UserRegistrationRequest } from '../../../src/interfaces/request';
-import { UserResponse } from '../../../src/interfaces/response';
-import { Logger } from '../../../src/lib/logger/logger';
-import User from '../../../src/models/user';
-import { UserService } from '../../../src/service/v1';
+} from '../../../resources/controller/v1/userController';
+import { UserRegistrationRequest } from '../../../../src/interfaces/request';
+import { UserResponse } from '../../../../src/interfaces/response';
+import { Logger } from '../../../../src/lib/logger/logger';
+import User from '../../../../src/models/user';
+import { UserService } from '../../../../src/service/v1';
 
 describe('User Service', () => {
   let mockLogger: Logger;

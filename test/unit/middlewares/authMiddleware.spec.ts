@@ -1,5 +1,5 @@
 import { Request, Response } from 'express';
-import {authMiddleware} from '../../src/middlewares/authMiddleware';
+import {authMiddleware} from '../../../src/middlewares/authMiddleware';
 import jwt from 'jsonwebtoken';
 
 
