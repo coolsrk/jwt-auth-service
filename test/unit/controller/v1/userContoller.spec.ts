@@ -1,9 +1,10 @@
-import { UserController } from '../../../src/controllers/v1';
-import { UserRegistrationRequest } from '../../../src/interfaces/request';
-import { Logger } from '../../../src/lib/logger/logger';
+import { UserController } from '../../../../src/controllers/v1';
+import { UserRegistrationRequest } from '../../../../src/interfaces/request';
+import { Logger } from '../../../../src/lib/logger/logger';
 import { Request, Response } from 'express';
-import { mockUserDbResponse, mockUserRegistrationRequest, mockUserResponse } from '../../resources/controller/v1/userController';
-import { UserResponse } from '../../../src/interfaces/response/';
+import { mockUserDbResponse, mockUserRegistrationRequest,
+   mockUserResponse } from '../../../resources/controller/v1/userController';
+import { UserResponse } from '../../../../src/interfaces/response';
 
 describe('UserController', () => {
   let mockUserController: UserController;

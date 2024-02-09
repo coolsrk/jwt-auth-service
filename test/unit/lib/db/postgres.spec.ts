@@ -1,5 +1,5 @@
-import { Logger } from '../../../src/lib/logger/logger';
-import { Postgres } from '../../../src/lib/db/postgres';
+import { Logger } from '../../../../src/lib/logger/logger';
+import { Postgres } from '../../../../src/lib/db/postgres';
 
 
 describe('DB connection', () => {
