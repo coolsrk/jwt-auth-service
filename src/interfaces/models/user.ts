@@ -1,4 +1,5 @@
 import { PasswordInterface } from './password';
+import { RefreshTokenInterface } from './refreshToken';
 
 export interface UserInterface {
   userId?: string;
@@ -7,6 +8,7 @@ export interface UserInterface {
   mobNo?: number;
   email: string;
   address?: string;
-  password: PasswordInterface;
+  password?: PasswordInterface;
+  refreshToken?: RefreshTokenInterface[];
   roleId? : number
 }

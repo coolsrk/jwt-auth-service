@@ -9,20 +9,22 @@ import {
 } from 'sequelize-typescript';
 import User from './user';
 import { RefreshTokenInterface } from '../interfaces/models';
+import Role from './role';
 
 @Table
 class RefreshToken extends Model<RefreshTokenInterface> {
   @Unique
   @PrimaryKey
   @Column({ type: DataType.UUID })
-  tokenId!: string;
+  refreshToken!: string;
 
   @ForeignKey(() => User)
   @Column({ type: DataType.UUID })
   userId!: string;
 
-  @Column({ type: DataType.UUID, allowNull: false })
-  refreshToken!: string;
+  @ForeignKey(() => Role)
+  @Column({ type: DataType.INTEGER})
+  roleId!: number;
 
   @Column({ type: DataType.DATE, allowNull: false })
   expiryTime!: string;

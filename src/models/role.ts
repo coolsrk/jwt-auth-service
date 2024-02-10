@@ -1,7 +1,5 @@
 import { AutoIncrement, Column, DataType,
-  HasOne,
   Model, PrimaryKey, Table, Unique } from 'sequelize-typescript';
-import User from './user';
 import { RoleInterface } from '../interfaces/models';
    
 @Table({
@@ -16,9 +14,6 @@ class Role extends Model<RoleInterface> {
   
  @Column({type: DataType.STRING})
  role!: string;
-
- @HasOne(()=> User, 'roleId')
- user!: User;
 }
 
 export default Role;
