@@ -9,8 +9,9 @@ export class AuthRoutes {
   }
 
   private setRoutes = () =>{
-    const userController = new AuthController();
-    this.router.post('/login', userController.login);
+    const authController = new AuthController();
+    this.router.post('/login', authController.login);
+    this.router.get('/refreshToken/:refreshToken', authController.getNewTokenByRefreshToken);
   };
 
   public getRoutes = () => {

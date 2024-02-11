@@ -15,3 +15,12 @@ export const mockUserDataWithAuthInfo = {
       updatedAt: new Date('2024-01-21T15:25:12.517Z')
   },
 };
+
+export const mockRefreshTokenInfo = {
+  refreshToken: 'test',
+  userId: 'test',
+  roleId: 1,
+  expiryTime: new Date(),
+  createdAt: new Date('2024-01-21T15:25:12.517Z'),
+  updatedAt: new Date('2024-01-21T15:25:12.517Z')
+};

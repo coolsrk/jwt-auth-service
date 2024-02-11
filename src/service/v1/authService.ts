@@ -8,6 +8,8 @@ import dotenv from 'dotenv';
 import { v4 } from 'uuid';
 import { LoginResponse } from '../../interfaces/response';
 import { UserService } from './userService';
+import RefreshToken from '../../models/refreshToken';
+import { DateTime } from 'luxon';
 dotenv.config();
 
 export class AuthService implements AuthServiceInterface {
@@ -36,26 +38,55 @@ export class AuthService implements AuthServiceInterface {
     }
   };
 
-  public generateJwtToken = (email: string, userId: string, roleId: number): LoginResponse => {
-    try{
+  public generateJwtToken = async (
+    email: string,
+    userId: string,
+    roleId: number
+  ): Promise<LoginResponse> => {
+    try {
       const refreshToken = v4();
-      const tokenId = v4();
       const role = roleId === 1 ? 'user' : 'admin';
 
       const token = jwt.sign(
         {
-          tokenId,
           userId,
           role,
           email,
         },
         process.env.JWT_SECRET_KEY!,
-        { expiresIn: 60 * 60 }
+        { expiresIn: 30 * 60 }
       );
+
+      const refreshTokenExpiryTime = DateTime.now()
+        .plus({ hours: 1 })
+        .toUTC()
+        .toISO();
+
+      await RefreshToken.create({
+        refreshToken,
+        userId,
+        roleId,
+        expiryTime: refreshTokenExpiryTime,
+      });
+
       return { token, refreshToken };
-    }catch(error){
+    } catch (error) {
       throw new Error(`Error while generating JWT token: 
       ${error instanceof Error ? error.message : JSON.stringify(error)}`);
     }
+  };
+
+  public getRefreshTokenInfo = async (refreshToken: string): Promise<RefreshToken | null> => {
+    try {
+      return await RefreshToken.findOne({where: {refreshToken: refreshToken}});
+    } catch (error) {
+      throw new Error(
+        error instanceof Error ? error.message : JSON.stringify(error)
+      );
+    }
+  };
+
+  public isRefeshTokenExpired = (expiryTime: string) => {
+    return new Date() > new Date(expiryTime);  
   };
 }

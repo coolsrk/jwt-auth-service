@@ -8,4 +8,5 @@ export interface AuthControllerInterface {
   authService: AuthService;
   userService: UserService;
   login(req: Request, res: Response, next: NextFunction): Promise<any>;
+  getNewTokenByRefreshToken(req: Request, res: Response, next: NextFunction): Promise<any>;
 }

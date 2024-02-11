@@ -1,7 +1,6 @@
 export interface RefreshTokenInterface {
-  userId: string;
-  tokenId : string;
   refreshToken: string;
+  userId: string;
+  roleId: number;
   expiryTime: string;
-  password?: string;
 }
