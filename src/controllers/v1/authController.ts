@@ -96,7 +96,7 @@ export class AuthController implements AuthControllerInterface {
       }
 
       if (
-        !this.authService.isRefeshTokenExpired(refreshTokenInfo?.expiryTime!)
+        this.authService.isRefeshTokenExpired(refreshTokenInfo?.expiryTime!)
       ) {
 
         /** TODO: Create an association between User and Refresh Token so
