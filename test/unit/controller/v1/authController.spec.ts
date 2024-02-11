@@ -168,7 +168,6 @@ describe('AuthController', () => {
     it(`Should generate new token and refresh token if the refresh token is expired.`, async () => {
       mockRequest.params = {refreshToken: 'test'};
 
-      // mockRefreshTokenInfo.expiryTime = new Date('2024-01-21T15:25:12.517Z');
       mockAuthController.authService.getRefreshTokenInfo
        = jest.fn().mockResolvedValueOnce(mockRefreshTokenInfo);
 
@@ -184,7 +183,6 @@ describe('AuthController', () => {
           token: 'test',
           refreshToken: '32-chars-long-uuid',
         });
-
 
       await mockAuthController.getNewTokenByRefreshToken(mockRequest, mockResponse, () => {});  
       expect(mockResponse.status(200).send).toHaveBeenCalledWith({

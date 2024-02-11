@@ -54,7 +54,7 @@ export class AuthService implements AuthServiceInterface {
           email,
         },
         process.env.JWT_SECRET_KEY!,
-        { expiresIn: 2 * 60 }
+        { expiresIn: 30 * 60 }
       );
 
       const refreshTokenExpiryTime = DateTime.now()

@@ -60,7 +60,6 @@ describe('Auth Service', () => {
       expect(jwtToken).toHaveProperty('token');
       expect(jwtToken).toHaveProperty('refreshToken');
       const decoded: any = jwt.decode(jwtToken.token);
-      console.log(JSON.stringify(decoded));
       expect(decoded).toHaveProperty('userId');
       expect(decoded).toHaveProperty('role');
       expect(decoded).toHaveProperty('email');
